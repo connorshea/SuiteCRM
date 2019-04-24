@@ -34,7 +34,6 @@ before_script:
   - ./chromedriver --url-base=/wd/hub &
   - ./vendor/bin/codecept build
   - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
-  - sed -e "s?%CI_BUILDS_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
   - service apache2 restart
 
 php-lint:

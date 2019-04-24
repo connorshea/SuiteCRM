@@ -1,9 +1,9 @@
 <VirtualHost *:80>
   # [...]
 
-  DocumentRoot %CI_BUILD_DIR%
+  DocumentRoot %${CI_BUILD_DIR}%
 
-  <Directory "%CI_BUILD_DIR%/">
+  <Directory "${CI_BUILD_DIR}/">
     Options FollowSymLinks MultiViews ExecCGI
     AllowOverride All
     Require all granted
