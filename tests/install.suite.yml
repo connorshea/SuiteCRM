@@ -15,4 +15,4 @@ modules:
         width: 1280
         height: 720
         chromeOptions:
-          args: ["--headless", "--no-sandbox"]
+          args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
