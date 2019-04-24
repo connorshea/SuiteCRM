@@ -38,8 +38,7 @@ before_script:
 
 php-lint:
   script:
-    # Put the actual lint command here:
-    - php lint
+    - for file in $(git diff --name-status HEAD~1 HEAD | egrep "^[ACMR].*\.php$" | cut -c 3-); do php -l $file; done
 
 # Use anchors to reuse common configuration options.
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
