@@ -11,8 +11,10 @@ modules:
         browser: chrome
         restart: true
         wait: 1
+        port: 9515
         # XGA Resolution / iPad 2 resolution (horizontal)
         width: 1280
         height: 720
-        chromeOptions:
-          args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+        capabilities:
+          "goog:chromeOptions": 
+            args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
