@@ -13,14 +13,12 @@ variables:
   COMPOSER_MEMORY_LIMIT: -1
 
 before_script:
-  - php -v
-  - apt-get update -y && apt-get install -yy zip unzip
+  - bash tests/docker_install.sh > /dev/null
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   - php composer-setup.php
   - php -r "unlink('composer-setup.php');"
   # gnupg and apt-transport-https are necessary for installing Chrome.
   - apt-get update -y && apt-get install -yy mysql-client
-  - pecl install gd zip intl
   - php composer.phar install
 
 php-lint:
