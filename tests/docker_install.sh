@@ -7,7 +7,7 @@ set -xe
 
 # Install git (the php image doesn't have it) which is required by composer
 apt-get update -yqq
-apt-get install apt-utils git libzip-dev zip -y
+apt-get install apt-utils git libzip-dev zip libpng-dev -y
 
 # Install mysql driver
 # Here you can install any other extension that you need
