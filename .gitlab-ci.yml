@@ -8,9 +8,12 @@ variables:
   INSTANCE_URL: http://localhost
   DATABASE_DRIVER: MYSQL
   DATABASE_NAME: automated_tests
-  DATABASE_HOST: localhost
+  DATABASE_HOST: mysql
   DATABASE_USER: automated_tests
   DATABASE_PASSWORD: automated_tests
+  MYSQL_DATABASE: automated_tests
+  MYSQL_USER: automated_tests
+  MYSQL_ROOT_PASSWORD: automated_tests
   MYSQL_ALLOW_EMPTY_PASSWORD: "1"
   INSTANCE_ADMIN_USER: admin
   INSTANCE_ADMIN_PASSWORD: admin1
@@ -26,14 +29,10 @@ before_script:
   - php composer.phar install
   - curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
   - apt-get update -qqy && apt-get install -yy google-chrome-stable
-  - whereis google-chrome-stable
   - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
   - unzip -o chromedriver_linux64.zip
   - ./chromedriver --url-base=/wd/hub &
   - ./vendor/bin/codecept build
-  - mysql -e "CREATE DATABASE automated_tests CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
-  - mysql -u root -e "CREATE USER 'automated_tests'@'localhost' IDENTIFIED BY 'automated_tests';"
-  - mysql -u root -e "GRANT ALL PRIVILEGES ON automated_tests.* TO 'automated_tests'@'localhost';"
   - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
   - sed -e "s?%CI_BUILDS_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
   - service apache2 restart
