@@ -20,6 +20,7 @@ before_script:
   - php -r "unlink('composer-setup.php');"
   # gnupg and apt-transport-https are necessary for installing Chrome.
   - apt-get update -y && apt-get install -yy mysql-client
+  - pecl install gd zip intl
   - php composer.phar install
 
 php-lint:
