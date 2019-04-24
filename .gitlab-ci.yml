@@ -29,7 +29,11 @@ variables:
 
 .php_codecept_before_script_template:
   before_script: &php_codecept_before_script_definition
-    <<: *default_before_script_definition
+    - bash tests/docker_install.sh > /dev/null
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - php composer.phar install
     # gnupg and apt-transport-https are necessary for installing Chrome.
     - apt-get update -y && apt-get install -yy mysql-client gnupg apt-transport-https
     - curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
