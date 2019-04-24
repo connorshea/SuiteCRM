@@ -31,7 +31,7 @@ before_script:
   - mysql -u root -e "CREATE USER 'automated_tests'@'localhost' IDENTIFIED BY 'automated_tests';"
   - mysql -u root -e "GRANT ALL PRIVILEGES ON automated_tests.* TO 'automated_tests'@'localhost';"
   - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
-  - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
+  - sed -e "s?%CI_BUILDS_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
   - service apache2 restart
 
 php-lint:
