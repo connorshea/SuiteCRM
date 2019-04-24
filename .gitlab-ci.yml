@@ -26,6 +26,7 @@ before_script:
   - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
   - unzip -o chromedriver_linux64.zip
   - ./chromedriver --url-base=/wd/hub &
+  - ./vendor/bin/codecept build
 
 php-lint:
   script:
