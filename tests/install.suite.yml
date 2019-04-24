@@ -14,3 +14,5 @@ modules:
         # XGA Resolution / iPad 2 resolution (horizontal)
         width: 1280
         height: 720
+        chromeOptions:
+          args: ["--headless", "--no-sandbox"]
