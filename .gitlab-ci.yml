@@ -19,30 +19,32 @@ variables:
   INSTANCE_ADMIN_PASSWORD: admin1
   COMPOSER_MEMORY_LIMIT: -1
 
-before_script:
-  - bash tests/docker_install.sh > /dev/null
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  - php composer-setup.php
-  - php -r "unlink('composer-setup.php');"
-  # gnupg and apt-transport-https are necessary for installing Chrome.
-  - apt-get update -y && apt-get install -yy mysql-client gnupg apt-transport-https
-  - php composer.phar install
-  - curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-  - apt-get update -qqy && apt-get install -yy google-chrome-stable
-  - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
-  - unzip -o chromedriver_linux64.zip
-  - ./chromedriver --url-base=/wd/hub &
-  - ./vendor/bin/codecept build
-  - ln -s $(pwd) /var/www/html
-  - service apache2 restart
+.default_before_script_template:
+  before_script: &default_before_script_definition
+    - bash tests/docker_install.sh > /dev/null
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - php composer.phar install
 
-php-lint:
-  script:
-    - for file in $(git diff --name-status HEAD~1 HEAD | egrep "^[ACMR].*\.php$" | cut -c 3-); do php -l $file; done
+.php_codecept_before_script_template:
+  before_script: &php_codecept_before_script_definition
+    <<: *default_before_script_definition
+    # gnupg and apt-transport-https are necessary for installing Chrome.
+    - apt-get update -y && apt-get install -yy mysql-client gnupg apt-transport-https
+    - curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+    - apt-get update -qqy && apt-get install -yy google-chrome-stable
+    - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+    - unzip -o chromedriver_linux64.zip
+    - ./chromedriver --url-base=/wd/hub &
+    - ./vendor/bin/codecept build
+    - ln -s $(pwd) /var/www/html
+    - service apache2 restart
 
 # Use anchors to reuse common configuration options.
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
 .php: &php
+  before_script: *php_codecept_before_script_definition
   script:
     # Run install wizard
     - ./vendor/bin/codecept run install --env travis-ci-hub -f -d --ext DotReporter
@@ -59,11 +61,16 @@ php-lint:
       - suitecrm.log
     expire_in: 2 weeks
 
-php-7.2:
+php-lint:
+  before_script: *default_before_script_definition
+  script:
+    - for file in $(git diff --name-status HEAD~1 HEAD | egrep "^[ACMR].*\.php$" | cut -c 3-); do php -l $file; done
+
+php:7.2:
+  <<: *php
   # Cache composer packages for reuse on the next run of the test suite.
   cache:
     # Set a key for the cache, e.g. based on the PHP version.
     key: 'php-7.2'
     paths:
       - vendor/
-  <<: *php
