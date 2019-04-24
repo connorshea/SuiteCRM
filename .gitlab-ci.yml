@@ -24,7 +24,7 @@ before_script:
   - apt-get update -qqy && apt-get install -yy google-chrome-stable
   - wget https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip
   - unzip -o chromedriver_linux64.zip
-  - ./chromedriver --url-base=/wd/hub &
+  - ./chromedriver --no-sandbox --url-base=/wd/hub &
 
 php-lint:
   script:
