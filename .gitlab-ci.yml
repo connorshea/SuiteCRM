@@ -15,7 +15,7 @@ variables:
 before_script:
   - php -v
   # gnupg and apt-transport-https are necessary for installing Chrome.
-  - apt-get update -qqy && apt-get install -qqyy mysql-client composer
+  - apt-get update -y && apt-get install -yy mysql-client composer
   - composer install
 
 php-lint:
