@@ -37,11 +37,11 @@ php-lint:
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
 .php: &php
   script:
-    - ./vendor/bin/codecept run install --env travis-ci-hub -f -vvv -d
     # Run API functional tests
     - ./vendor/bin/codecept run tests/api/V8/ -f -vvv
     # Run basic acceptance tests
     - ./vendor/bin/codecept run acceptance --env travis-ci-hub -f -vvv
+    - ./vendor/bin/codecept run install --env travis-ci-hub -f -vvv -d
   # Save 'var/log/apache2/error.log' and 'suitecrm.log' as artifacts
   # https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html
   artifacts:
