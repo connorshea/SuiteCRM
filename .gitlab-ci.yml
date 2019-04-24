@@ -1,9 +1,5 @@
 image: "php:7.2.17-apache-stretch"
 
-services:
-  - mysql:5.7
-  # Add elasticsearch here as well.
-
 variables:
   INSTANCE_URL: http://localhost
   DATABASE_DRIVER: MYSQL
@@ -72,6 +68,9 @@ php-lint:
 
 php:7.2:
   <<: *php
+  services:
+    # Add elasticsearch here as well.
+    - mysql:5.7
   # Cache composer packages for reuse on the next run of the test suite.
   cache:
     # Set a key for the cache, e.g. based on the PHP version.
