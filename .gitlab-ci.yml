@@ -18,8 +18,10 @@ before_script:
   - php composer-setup.php
   - php -r "unlink('composer-setup.php');"
   # gnupg and apt-transport-https are necessary for installing Chrome.
-  - apt-get update -y && apt-get install -yy mysql-client
+  - apt-get update -y && apt-get install -yy mysql-client gnupg apt-transport-https
   - php composer.phar install
+  - curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+  - apt-get update -qqy && apt-get install -yy google-chrome-stable
 
 php-lint:
   script:
