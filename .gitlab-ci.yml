@@ -6,15 +6,15 @@ services:
   # Add elasticsearch here as well.
 
 variables:
-  - INSTANCE_URL: http://localhost
-  - DATABASE_DRIVER: MYSQL
-  - DATABASE_NAME: automated_tests
-  - DATABASE_HOST: localhost
-  - DATABASE_USER: automated_tests
-  - DATABASE_PASSWORD: automated_tests
-  - INSTANCE_ADMIN_USER: admin
-  - INSTANCE_ADMIN_PASSWORD: admin1
-  - COMPOSER_MEMORY_LIMIT: -1
+  INSTANCE_URL: http://localhost
+  DATABASE_DRIVER: MYSQL
+  DATABASE_NAME: automated_tests
+  DATABASE_HOST: localhost
+  DATABASE_USER: automated_tests
+  DATABASE_PASSWORD: automated_tests
+  INSTANCE_ADMIN_USER: admin
+  INSTANCE_ADMIN_PASSWORD: admin1
+  COMPOSER_MEMORY_LIMIT: -1
 
 before_script:
   - php -v
@@ -29,7 +29,7 @@ php-lint:
 
 # Use anchors to reuse common configuration options.
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
-.php:
+.php: &php
   script:
     - ./vendor/bin/codecept run install --env travis-ci-hub -f -vvv
     # Run API functional tests
