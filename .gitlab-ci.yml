@@ -68,6 +68,12 @@ php-lint:
   before_script: *default_before_script_definition
   script:
     - for file in $(git diff --name-status HEAD~1 HEAD | egrep "^[ACMR].*\.php$" | cut -c 3-); do php -l $file; done
+  # Cache composer packages for reuse on the next run of the test suite.
+  cache:
+    # Set a key for the cache, e.g. based on the PHP version.
+    key: 'php-lint'
+    paths:
+      - vendor/
 
 php:7.2:
   <<: *php
