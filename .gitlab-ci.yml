@@ -33,7 +33,7 @@ before_script:
   - unzip -o chromedriver_linux64.zip
   - ./chromedriver --url-base=/wd/hub &
   - ./vendor/bin/codecept build
-  - cp . /var/www/html/
+  - cp -r . /var/www/html/
   - service apache2 restart
 
 php-lint:
