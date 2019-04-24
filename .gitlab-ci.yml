@@ -19,9 +19,8 @@ variables:
 
 before_script:
   - php -v
-  - apt-get update -qqy && apt-get install -qqyy gnupg apt-transport-https
-  - curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-  - apt-get update -qqy && apt-get install -qqyy google-chrome-stable mysql-client composer
+  # gnupg and apt-transport-https are necessary for installing Chrome.
+  - apt-get update -qqy && apt-get install -qqyy mysql-client composer
   - composer install
 
 php-lint:
