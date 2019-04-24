@@ -22,6 +22,9 @@ before_script:
   - php composer.phar install
   - curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
   - apt-get update -qqy && apt-get install -yy google-chrome-stable
+  - wget https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip
+  - unzip -o chromedriver_linux64.zip
+  - ./chromedriver --url-base=/wd/hub &
 
 php-lint:
   script:
