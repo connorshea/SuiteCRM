@@ -44,6 +44,9 @@ variables:
 # Use anchors to reuse common configuration options.
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
 .php: &php
+  services:
+    # Add elasticsearch here as well.
+    - mysql:5.7
   before_script: *php_codecept_before_script_definition
   script:
     # Run install wizard
@@ -68,9 +71,6 @@ php-lint:
 
 php:7.2:
   <<: *php
-  services:
-    # Add elasticsearch here as well.
-    - mysql:5.7
   # Cache composer packages for reuse on the next run of the test suite.
   cache:
     # Set a key for the cache, e.g. based on the PHP version.
