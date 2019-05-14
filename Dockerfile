@@ -1,4 +1,4 @@
-FROM php:7.2.17-apache-stretch
+FROM php:7.2.18-apache-stretch
 
 # Install packages for running SuiteCRM and its dependencies.
 # git is required by composer
@@ -12,13 +12,18 @@ RUN apt-get update && apt-get install -y apt-utils \
     g++ \
     mysql-client \
     gnupg \
-    apt-transport-https
+    apt-transport-https \
+    libcurl3-dev \
+    libxml2-dev \
+    libc-client-dev \
+    libkrb5-dev
 
-# Install mysql driver
-# Here you can install any other extension that you need
+# Install MySQL, zip, intl, mbstring, imap, curl, etc. for SuiteCRM and/or Composer.
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-configure zip --with-libzip
-RUN docker-php-ext-install pdo_mysql zip gd intl
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-install pdo_mysql mysqli zip gd intl mbstring imap curl json
+RUN docker-php-ext-install gettext
 
 # Install Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
