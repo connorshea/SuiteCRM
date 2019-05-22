@@ -38,7 +38,6 @@ variables:
     - selenium/standalone-chrome:latest
   before_script: *php_codecept_before_script_definition
   script:
-    - echo $SELENIUM_REMOTE_URL
     # Run install wizard
     - ./vendor/bin/codecept run install --env travis-ci-hub -f -d --ext DotReporter
     - ./build/push_output.sh
