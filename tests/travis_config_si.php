@@ -14,7 +14,9 @@ $sugar_config_si  = array(
     'setup_db_create_database' => 1,
     'setup_db_database_name' => 'automated_tests',
     'setup_db_drop_tables' => 0,
-    'setup_db_host_name' => 'localhost',
+    # The DB host is called `mysql`` in GitLab CI but I'm not sure if this
+    # will actually work. Maybe change back to localhost?
+    'setup_db_host_name' => 'mysql',
     'setup_db_pop_demo_data' => true,
     'setup_db_type' => 'mysql',
     'setup_db_username_is_privileged' => true,
