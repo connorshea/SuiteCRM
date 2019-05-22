@@ -21,7 +21,6 @@ variables:
 
 .php_codecept_before_script_template:
   before_script: &php_codecept_before_script_definition
-    - echo $CI_PROJECT_DIR
     # Install dependencies.
     - composer install --no-plugins --no-scripts
     # Replace the variables with the pwd.
