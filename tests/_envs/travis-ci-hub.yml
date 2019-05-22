@@ -3,9 +3,7 @@ modules:
     - \SuiteCRM\Test\Driver\WebDriver
   config:
     \SuiteCRM\Test\Driver\WebDriver:
-      # Use an environment variable for defining the Selenium URL.
-      # https://github.com/Codeception/Codeception/issues/1496#issuecomment-354307710
-      url: %SELENIUM_REMOTE_URL%
+      url: "http://localhost/"
       wait: 5
       port: 9515 # ChromeDriver port
       browser: chrome
@@ -13,5 +11,6 @@ modules:
       capabilities:
         "goog:chromeOptions":
             args: ["--headless", "--disable-gpu", "window-size=1920x1080"]
+            binary: "/usr/bin/google-chrome-stable"
 
 #google-chrome-stable: /usr/bin/google-chrome-stable /usr/bin/X11/google-chrome-stable /usr/share/man/man1/google-chrome-stable.1.gz
