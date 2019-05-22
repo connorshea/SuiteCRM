@@ -51,7 +51,9 @@ variables:
     paths:
       - var/log/apache2/error.log
       - suitecrm.log
+      - tests/_output
     expire_in: 2 weeks
+    when: always
 
 php-lint:
   before_script: *default_before_script_definition
