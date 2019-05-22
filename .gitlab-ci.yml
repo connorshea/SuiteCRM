@@ -23,12 +23,12 @@ variables:
   before_script: &php_codecept_before_script_definition
     - composer install --no-plugins --no-scripts
     # Run chromedriver in the background.
-    - chromedriver --url-base=/wd/hub &
     - ./vendor/bin/codecept build
     # Create a symbolic link between the current directory and /var/www/html.
     - ln -s $(pwd) /var/www/html
     # Restart apache.
     - service apache2 restart
+    - chromedriver --url-base=/wd/hub &
 
 # Use anchors to reuse common configuration options.
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
@@ -51,7 +51,7 @@ variables:
     paths:
       - var/log/apache2/error.log
       - suitecrm.log
-      - tests/_output
+      - tests/_output/
     expire_in: 2 weeks
     when: always
 
