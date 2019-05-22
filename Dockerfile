@@ -1,3 +1,5 @@
+# For use in GitLab CI with the CRM.
+# Needs to be pushed to the GitLab Container Registry for the SuiteCRM repository.
 FROM php:7.2.18-apache-stretch
 
 # Install packages for running SuiteCRM and its dependencies.
@@ -29,7 +31,6 @@ RUN docker-php-ext-install gettext
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
-# RUN php composer.phar install
 
 # Install Chrome and ChromeDriver
 RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
