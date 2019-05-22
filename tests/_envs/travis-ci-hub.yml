@@ -5,10 +5,8 @@ modules:
     \SuiteCRM\Test\Driver\WebDriver:
       # Use an environment variable for defining the Selenium URL.
       # https://github.com/Codeception/Codeception/issues/1496#issuecomment-354307710
-      url: http://localhost
-      host: selenium
-      port: 4444
-      wait: 10
+      url: http://selenium:4444/wd/hub/
+      wait: 5
       browser: chrome
 
 #google-chrome-stable: /usr/bin/google-chrome-stable /usr/bin/X11/google-chrome-stable /usr/share/man/man1/google-chrome-stable.1.gz
