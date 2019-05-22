@@ -27,10 +27,11 @@ RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install pdo_mysql mysqli zip gd intl mbstring imap curl json
 RUN docker-php-ext-install gettext
 
-# Install Composer
+# Install Composer and move it to the bin folder so it can be used with just `composer`.
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
+RUN mv composer.phar /usr/local/bin/composer
 
 # Install Chrome and ChromeDriver
 RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list

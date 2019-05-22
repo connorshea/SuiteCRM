@@ -17,12 +17,11 @@ variables:
 
 .default_before_script_template:
   before_script: &default_before_script_definition
-    - php ../composer.phar install
+    - composer install
 
 .php_codecept_before_script_template:
   before_script: &php_codecept_before_script_definition
-    - ls ../
-    - php ../composer.phar install
+    - composer install
     # Run chromedriver in the background.
     - ../chromedriver --url-base=/wd/hub &
     - ./vendor/bin/codecept build
