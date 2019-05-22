@@ -37,4 +37,8 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 RUN apt-get update -qqy && apt-get install -yy google-chrome-stable
 RUN wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
-RUN unzip -o chromedriver_linux64.zip
+# Unzip chromedriver into the /usr/bin/ so the command is accessible across the system.
+RUN unzip -o chromedriver_linux64.zip -d /usr/local/bin/
+
+# Clean up the container to minimize its size.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
