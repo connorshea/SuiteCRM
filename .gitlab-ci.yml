@@ -17,8 +17,6 @@ variables:
 
 .default_before_script_template:
   before_script: &default_before_script_definition
-    - ls
-    - composer diagnose
     - composer install --no-plugins --no-scripts
 
 .php_codecept_before_script_template:
