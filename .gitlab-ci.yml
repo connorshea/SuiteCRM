@@ -24,6 +24,8 @@ variables:
     - echo $CI_PROJECT_DIR
     # Install dependencies.
     - composer install --no-plugins --no-scripts
+    # Replace the variables with the pwd.
+    - sed -e "s?\${CI_PROJECT_DIR}?$(pwd)?g" --in-place build/travis-ci-apache 
     # Copy Apache CI config into Apache directory.
     - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
     - ln -s ./* /var/www/html/
