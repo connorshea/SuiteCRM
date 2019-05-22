@@ -2,6 +2,8 @@
 # Needs to be pushed to the GitLab Container Registry for the SuiteCRM repository.
 FROM php:7.2.18-apache-stretch
 
+ENV SHELL /bin/bash
+
 # Install packages for running SuiteCRM and its dependencies.
 # git is required by composer
 # gnupg and apt-transport-https are necessary for installing Chrome.
