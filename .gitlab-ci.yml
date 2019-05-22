@@ -28,7 +28,7 @@ variables:
     - sed -e "s?\${CI_PROJECT_DIR}?$(pwd)?g" --in-place build/travis-ci-apache 
     # Copy Apache CI config into Apache directory.
     - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
-    - ln -s ./* /var/www/html/
+    # - ln -s ./* /var/www/html/
     - cat /etc/apache2/sites-available/000-default.conf
     # Restart apache.
     - service apache2 restart
@@ -47,7 +47,6 @@ variables:
   script:
     # Run install wizard
     - ./vendor/bin/codecept run install --env travis-ci-hub -f -d --ext DotReporter
-    - ./build/push_output.sh
     # Run API functional tests
     - ./vendor/bin/codecept run tests/api/V8/ -f -vvv
     # Run basic acceptance tests
