@@ -17,24 +17,25 @@ variables:
 
 .default_before_script_template:
   before_script: &default_before_script_definition
-    - php composer.phar install
+    - php ../composer.phar install
 
 .php_codecept_before_script_template:
   before_script: &php_codecept_before_script_definition
-    - ls
-    - ls -R
-    - php composer.phar install
+    - ls ../
+    - php ../composer.phar install
     # Run chromedriver in the background.
-    - ./chromedriver --url-base=/wd/hub &
+    - ../chromedriver --url-base=/wd/hub &
     - ./vendor/bin/codecept build
+    # Create a symbolic link between the current directory and /var/www/html.
     - ln -s $(pwd) /var/www/html
+    # Restart apache.
     - service apache2 restart
 
 # Use anchors to reuse common configuration options.
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
 .php: &php
   services:
-    # Add elasticsearch here as well.
+    # TODO: Add elasticsearch here as well.
     - mysql:5.7
   before_script: *php_codecept_before_script_definition
   script:
