@@ -23,7 +23,7 @@ variables:
   before_script: &php_codecept_before_script_definition
     - composer install --no-plugins --no-scripts
     # Run chromedriver in the background.
-    - ../chromedriver --url-base=/wd/hub &
+    - chromedriver --url-base=/wd/hub &
     - ./vendor/bin/codecept build
     # Create a symbolic link between the current directory and /var/www/html.
     - ln -s $(pwd) /var/www/html
