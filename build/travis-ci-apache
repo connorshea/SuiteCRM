@@ -1,13 +1,13 @@
 <VirtualHost *:80>
-  # [...]
+  ServerName localhost
 
   DocumentRoot ${CI_PROJECT_DIR}
 
-  <Directory "${CI_PROJECT_DIR}/">
+  <Directory "${CI_PROJECT_DIR}">
     Options FollowSymLinks MultiViews ExecCGI
     AllowOverride All
     Require all granted
   </Directory>
 
-  # [...]
+  ErrorLog ${APACHE_LOG_DIR}/error.log
 </VirtualHost>

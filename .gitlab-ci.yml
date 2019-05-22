@@ -26,6 +26,8 @@ variables:
     - composer install --no-plugins --no-scripts
     # Copy Apache CI config into Apache directory.
     - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
+    - ln -s ./* /var/www/html/
+    - cat /etc/apache2/sites-available/000-default.conf
     # Restart apache.
     - service apache2 restart
     # Set up codecept.
