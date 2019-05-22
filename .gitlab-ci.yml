@@ -21,13 +21,15 @@ variables:
 
 .php_codecept_before_script_template:
   before_script: &php_codecept_before_script_definition
+    # Install dependencies.
     - composer install --no-plugins --no-scripts
-    # Run chromedriver in the background.
-    - ./vendor/bin/codecept build
-    # Create a symbolic link between the current directory and /var/www/html.
-    - ln -s $(pwd) /var/www/html
+    # Copy Apache CI config into Apache directory.
+    - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
     # Restart apache.
     - service apache2 restart
+    # Set up codecept.
+    - ./vendor/bin/codecept build
+    # Run chromedriver in the background.
     - chromedriver --url-base=/wd/hub &
 
 # Use anchors to reuse common configuration options.
