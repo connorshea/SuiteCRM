@@ -14,6 +14,7 @@ variables:
   INSTANCE_ADMIN_USER: admin
   INSTANCE_ADMIN_PASSWORD: admin1
   COMPOSER_MEMORY_LIMIT: -1
+  SELENIUM_REMOTE_URL: "http://selenium__standalone-chrome:4444/wd/hub/"
 
 .default_before_script_template:
   before_script: &default_before_script_definition
@@ -22,8 +23,6 @@ variables:
 .php_codecept_before_script_template:
   before_script: &php_codecept_before_script_definition
     - composer install --no-plugins --no-scripts
-    # Run chromedriver in the background.
-    - chromedriver --url-base=/wd/hub &
     - ./vendor/bin/codecept build
     # Create a symbolic link between the current directory and /var/www/html.
     - ln -s $(pwd) /var/www/html
@@ -36,6 +35,7 @@ variables:
   services:
     # TODO: Add elasticsearch here as well.
     - mysql:5.7
+    - selenium/standalone-chrome:latest
   before_script: *php_codecept_before_script_definition
   script:
     # Run install wizard
