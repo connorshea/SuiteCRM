@@ -14,7 +14,7 @@ variables:
   INSTANCE_ADMIN_USER: admin
   INSTANCE_ADMIN_PASSWORD: admin1
   COMPOSER_MEMORY_LIMIT: -1
-  SELENIUM_REMOTE_URL: "http://selenium:4444/wd/hub/"
+  SELENIUM_REMOTE_URL: "http://selenium__standalone-chrome:4444/wd/hub/"
 
 .default_before_script_template:
   before_script: &default_before_script_definition
@@ -34,9 +34,8 @@ variables:
 .php: &php
   services:
     # TODO: Add elasticsearch here as well.
-    - name: mysql:5.7
-    - name: selenium/standalone-chrome:latest
-      alias: selenium
+    - mysql:5.7
+    - selenium/standalone-chrome:latest
   before_script: *php_codecept_before_script_definition
   script:
     - echo $SELENIUM_REMOTE_URL
