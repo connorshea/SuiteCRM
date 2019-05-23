@@ -3,7 +3,7 @@
 # Suite for acceptance tests.
 # Perform tests in browser using the SuiteCRM WebDriver
 #
-# Use the enviornmental config files to configure the driver
+# Use the environmental config files to configure the driver
 
 class_name: AcceptanceTester
 modules:
@@ -17,11 +17,8 @@ modules:
             url: "https://demo.suiteondemand.com/"
             browser: chrome
             restart: true
-            wait: 1
+            wait: 10
             port: 9515
-            # XGA Resolution / iPad 2 resolution (horizontal)
-            width: 1280
-            height: 720
             capabilities:
             "goog:chromeOptions": 
                 args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
