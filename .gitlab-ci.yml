@@ -70,7 +70,6 @@ variables:
     - ps aux
     # Run basic acceptance tests
     - echo "\$sugar_config['imap_test'] = true;" >> config_override.php
-    - chromedriver --url-base=/wd/hub &
     - ./vendor/bin/codecept run acceptance --env travis-ci-hub -f -d -vvv
   # Save 'var/log/apache2/error.log', 'suitecrm.log', and tests output as artifacts
   # https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html
