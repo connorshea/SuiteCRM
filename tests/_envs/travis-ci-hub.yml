@@ -10,7 +10,7 @@ modules:
       window_size: false
       capabilities:
         "goog:chromeOptions":
-            args: ["--headless", "--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage", "window-size=1920x1080"]
+            args: ["--headless", "--disable-gpu", "--no-sandbox", "window-size=1920x1080"]
             binary: "/usr/bin/google-chrome-stable"
 
 #google-chrome-stable: /usr/bin/google-chrome-stable /usr/bin/X11/google-chrome-stable /usr/share/man/man1/google-chrome-stable.1.gz
