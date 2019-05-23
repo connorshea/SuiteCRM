@@ -40,8 +40,13 @@ variables:
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
 .php: &php
   services:
-    # TODO: Add elasticsearch here as well.
-    - mysql:5.7
+    - name: mysql:5.7
+    # TODO: Enable elasticsearch.
+    # See https://gitlab.com/gitlab-org/gitlab-ce/issues/42214#note_74842882
+    # - name: docker.elastic.co/elasticsearch/elasticsearch-oss:5.6
+    #   alias: elasticsearch
+    #   command: [ "bin/elasticsearch", "-Ediscovery.type=single-node" ]
+
   before_script: *php_codecept_before_script_definition
   script:
     # Run install wizard
