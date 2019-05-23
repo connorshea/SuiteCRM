@@ -55,7 +55,7 @@ variables:
   # https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html
   artifacts:
     paths:
-      - var/log/apache2/error.log
+      - /var/log/apache2/error.log
       - suitecrm.log
       - tests/_output/
     expire_in: 2 weeks
