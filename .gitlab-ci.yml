@@ -67,6 +67,7 @@ variables:
     # - chmod 600 Api/V8/OAuth2/p*.key
     # Run API functional tests
     # - ./vendor/bin/codecept run tests/api/V8/ -f -vvv
+    - ps aux
     # Run basic acceptance tests
     - ./vendor/bin/codecept run acceptance --env travis-ci-hub -f -vvv
   # Save 'var/log/apache2/error.log' and 'suitecrm.log' as artifacts
