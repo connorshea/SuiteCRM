@@ -2,5 +2,6 @@
 {
 	"dockerFile": "Dockerfile",
 	"extensions": [],
-	"appPort": "8001:80"
+	"appPort": "8001:80",
+	"postCreateCommand": "cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf && sed -e \"s?\\${CI_PROJECT_DIR}?$(pwd)?g\" --in-place /etc/apache2/sites-available/000-default.conf && cp travis.php.ini /usr/local/etc/php/php.ini && service apache2 restart"
 }

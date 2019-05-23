@@ -24,12 +24,12 @@ variables:
     # Install dependencies.
     - composer install --no-plugins --no-scripts
     - ls
-    # Replace the variables with the pwd.
-    - sed -e "s?\${CI_PROJECT_DIR}?$(pwd)?g" --in-place build/travis-ci-apache 
     # Copy Apache CI config into Apache directory.
     - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
-    # - ln -s ./* /var/www/html/
-    - cat /etc/apache2/sites-available/000-default.conf
+    # Replace the variables in config with the pwd.
+    - sed -e "s?\${CI_PROJECT_DIR}?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
+    # Copy Travis PHP INI.
+    - cp travis.php.ini /usr/local/etc/php/php.ini 
     # Restart apache.
     - service apache2 restart
     # Set up codecept.
