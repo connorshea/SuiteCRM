@@ -17,7 +17,7 @@ modules:
             url: "https://demo.suiteondemand.com/"
             browser: chrome
             restart: true
-            wait: 10
+            wait: 1
             port: 9515
             capabilities:
             "goog:chromeOptions": 
