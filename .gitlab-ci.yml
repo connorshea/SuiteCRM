@@ -23,6 +23,7 @@ variables:
   before_script: &php_codecept_before_script_definition
     # Install dependencies.
     - composer install --no-plugins --no-scripts
+    - ./vendor/bin/robo build:suitep
     # Replace the variables with the pwd.
     - sed -e "s?\${CI_PROJECT_DIR}?$(pwd)?g" --in-place build/travis-ci-apache 
     # Copy Apache CI config into Apache directory.
