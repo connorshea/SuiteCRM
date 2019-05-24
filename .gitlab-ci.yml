@@ -42,9 +42,9 @@ variables:
   services:
     - name: mysql:5.7
     # See https://gitlab.com/gitlab-org/gitlab-ce/issues/42214#note_74842882
-    - name: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
-      alias: elasticsearch
-      command: ["bin/elasticsearch", "-Ediscovery.type=single-node"]
+    # - name: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+    #   alias: elasticsearch
+    #   command: ["bin/elasticsearch", "-Ediscovery.type=single-node"]
 
   before_script: *php_codecept_before_script_definition
   script:
