@@ -23,18 +23,18 @@ variables:
   before_script: &php_codecept_before_script_definition
     # Install dependencies.
     - composer install --no-plugins --no-scripts --no-progress --no-suggest
+    # Run chromedriver in the background.
+    - chromedriver --url-base=/wd/hub &
     # Copy Apache CI config into Apache directory.
     - cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
     # Replace the variables in config with the pwd.
     - sed -e "s?\${CI_PROJECT_DIR}?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
     # Copy Travis PHP INI.
-    - cp travis.php.ini /usr/local/etc/php/php.ini 
+    - cp travis.php.ini /usr/local/etc/php/php.ini
     # Restart apache.
     - service apache2 restart
     # Set up codecept.
     - ./vendor/bin/codecept build
-    # Run chromedriver in the background.
-    - chromedriver --url-base=/wd/hub &
 
 # Use anchors to reuse common configuration options.
 # https://docs.gitlab.com/ee/ci/yaml/README.html#anchors
