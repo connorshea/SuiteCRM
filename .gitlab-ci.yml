@@ -41,11 +41,10 @@ variables:
 .php: &php
   services:
     - name: mysql:5.7
-    # TODO: Enable elasticsearch.
     # See https://gitlab.com/gitlab-org/gitlab-ce/issues/42214#note_74842882
-    # - name: docker.elastic.co/elasticsearch/elasticsearch-oss:5.6
-    #   alias: elasticsearch
-    #   command: [ "bin/elasticsearch", "-Ediscovery.type=single-node" ]
+    - name: docker.elastic.co/elasticsearch/elasticsearch-oss:5.6
+      alias: elasticsearch
+      command: ["bin/elasticsearch", "-Ediscovery.type=single-node"]
 
   before_script: *php_codecept_before_script_definition
   script:
@@ -57,7 +56,7 @@ variables:
     - echo "\$sugar_config['logger']['level'] = 'fatal';" >> config_override.php
     - cd tests
     # Removed --stop-on-failure --stop-on-error flags for now since the CI config doesn't set up ElasticSearch.
-    # - ../vendor/bin/phpunit --colors --configuration $(pwd)/phpunit.xml.dist ./tests/unit/phpunit
+    - ../vendor/bin/phpunit --colors --configuration $(pwd)/phpunit.xml.dist ./tests/unit/phpunit
     - cd ..
     # # Install OAuth2 demo data
     # - mysql --host=mysql -u${MYSQL_USER} -p${MYSQL_PASSWORD} -D${MYSQL_DATABASE} -v -e "source tests/_data/api_data.sql"
