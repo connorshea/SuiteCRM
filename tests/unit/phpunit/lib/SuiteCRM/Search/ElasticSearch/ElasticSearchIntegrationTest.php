@@ -246,6 +246,7 @@ class ElasticSearchIntegrationTest extends SuiteCRM\Search\SearchTestAbstract
 
     public function testWithSearchdefs()
     {
+        print_r($GLOBALS['sugar_config']['search']['ElasticSearch']);
         $this->indexer->setDocumentifier(new SearchDefsDocumentifier());
 
         $this->indexRunner();
@@ -254,6 +255,7 @@ class ElasticSearchIntegrationTest extends SuiteCRM\Search\SearchTestAbstract
     public function testDifferentialIndexing()
     {
         global $timedate;
+        print_r($GLOBALS['sugar_config']['search']['ElasticSearch']);
         $timedate->allow_cache = false;
 
         $module = 'Contacts';
