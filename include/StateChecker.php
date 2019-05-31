@@ -87,13 +87,7 @@ class StateChecker
      * @var string
      */
     protected $lastHash;
-    
-    /**
-     *
-     * @var array
-     */
-    protected $traces;
-    
+
     /**
      *
      * @var integer
@@ -119,47 +113,10 @@ class StateChecker
             throw new StateCheckerException('Incompatible DB type, only supported: mysqli');
         }
         $this->resetHashes();
-        $this->resetTraces();
-        
-        if (StateCheckerConfig::get('redefineMemoryLimit')) {
-            $this->memoryLimit = ini_get('memory_limit');
-            ini_set('memory_limit', -1);
-        }
                 
         if (StateCheckerConfig::get('autoRun')) {
             $this->getStateHash();
         }
-    }
-    
-    /**
-     *
-     * @return array traces
-     * @throws StateCheckerException
-     */
-    public function getTraces()
-    {
-        if (StateCheckerConfig::get('saveTraces')) {
-            throw new StateCheckerException('Trace information is not saved, use StateCheckerConfig::get(\'saveTraces\') as true');
-        }
-        return $this->traces;
-    }
-    
-    /**
-     *
-     */
-    public function __destruct()
-    {
-        if (StateCheckerConfig::get('redefineMemoryLimit')) {
-            ini_set('memory_limit', $this->memoryLimit);
-        }
-    }
-    
-    /**
-     * resetTraces
-     */
-    protected function resetTraces()
-    {
-        $this->traces = [];
     }
 
     /**
@@ -227,10 +184,6 @@ class StateChecker
 
         if (!$this->checkHash($hash, $key)) {
             throw new StateCheckerException('Hash doesn\'t match at key "' . $key . '".');
-        }
-        
-        if (StateCheckerConfig::get('saveTraces')) {
-            $this->traces[$key][] = debug_backtrace();
         }
         
         return $hash;
