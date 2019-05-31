@@ -87,7 +87,7 @@ class TestEnvironmentCommands extends \Robo\Tasks
         $default_instance_url = $this->chooseConfigOrDefault('site_url', 'http://localhost');
         $this->askDefaultOptionWhenEmpty('Instance URL:', $default_instance_url, $opts['instance_url']);
         $this->askDefaultOptionWhenEmpty('Instance Admin Username:', 'admin', $opts['instance_admin_user']);
-        $this->askDefaultOptionWhenEmpty('Instance Admin Password:', 'admin1', $opts['instance_admin_password']);
+        $this->askDefaultOptionWhenEmpty('Instance Admin Password:', 'admin', $opts['instance_admin_password']);
         $this->askDefaultOptionWhenEmpty('Instance OAuth2 Client ID:', 'suitecrm_client', $opts['instance_client_id']);
         $this->askDefaultOptionWhenEmpty('Instance OAuth2 Client Secret:', 'secret', $opts['instance_client_secret']);
 
