@@ -42,9 +42,9 @@ variables:
   services:
     - name: mysql:5.7
     # See https://gitlab.com/gitlab-org/gitlab-ce/issues/42214#note_74842882
-    # - name: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
-    #   alias: elasticsearch
-    #   command: ["bin/elasticsearch", "-Ediscovery.type=single-node"]
+    - name: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+      alias: elasticsearch
+      command: ["bin/elasticsearch", "-Expack.security.enabled=false", "-Ediscovery.type=single-node"]
 
   before_script: *php_codecept_before_script_definition
   script:
@@ -54,6 +54,8 @@ variables:
     - echo "\$sugar_config['state_checker']['test_state_check_mode'] = 2;" >> config_override.php
     - echo "\$sugar_config['show_log_trace'] = true;" >> config_override.php
     - echo "\$sugar_config['logger']['level'] = 'fatal';" >> config_override.php
+    # Try pinging the ElasticSearch instance to see if it's up.
+    - curl -X GET "http://elasticsearch:9200/_cat/health"
     # Removed --stop-on-failure --stop-on-error flags for now since the CI config doesn't set up ElasticSearch.
     - ./vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit
     # # Install OAuth2 demo data
