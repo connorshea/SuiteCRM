@@ -56,6 +56,7 @@ variables:
     - echo "\$sugar_config['logger']['level'] = 'fatal';" >> config_override.php
     # Try pinging the ElasticSearch instance to see if it's up.
     - curl -X GET "http://elasticsearch:9200/_cat/health"
+    - cat config.php
     # Removed --stop-on-failure --stop-on-error flags for now since the CI config doesn't set up ElasticSearch.
     - ./vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit
     # # Install OAuth2 demo data
@@ -82,6 +83,8 @@ variables:
       - /var/log/apache2/error.log
       - suitecrm.log
       - tests/_output/
+      - config.php
+      - config_si.php
     expire_in: 2 weeks
     when: always
 
