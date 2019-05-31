@@ -6,7 +6,6 @@ modules:
       url: "http://localhost/"
       wait: 10
       port: 9515 # ChromeDriver port
-      restart: false
       browser: chrome
       window_size: false
       capabilities:
