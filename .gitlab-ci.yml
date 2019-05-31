@@ -54,10 +54,7 @@ variables:
     - echo "\$sugar_config['state_checker']['test_state_check_mode'] = 2;" >> config_override.php
     - echo "\$sugar_config['show_log_trace'] = true;" >> config_override.php
     - echo "\$sugar_config['logger']['level'] = 'fatal';" >> config_override.php
-    # Try pinging the ElasticSearch instance to see if it's up.
-    - curl -X GET "http://elasticsearch:9200/_cat/health"
-    - cat config.php
-    # Override configured host for elasticsearch.
+    # Override configured host for ElasticSearch so it will connect to the GitLab CI ElasticSearch service.
     - echo "\$sugar_config['search']['ElasticSearch']['host'] = 'elasticsearch';" >> config_override.php
     # Removed --stop-on-failure --stop-on-error flags for now since the CI config doesn't set up ElasticSearch.
     - ./vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit
