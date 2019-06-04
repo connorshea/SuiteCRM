@@ -77,7 +77,7 @@ class ElasticsearchCest
 
         $I->click('#elastic_search');
         $I->checkOption('#es-enabled');
-        $I->fillField('#es-host', 'localhost');
+        $I->fillField('#es-host', $GLOBALS['sugar_config']['search']['ElasticSearch']['host']);
         $I->fillField('#es-user', 'admin');
         $I->fillField('#es-password', 'admin');
 
