@@ -6,6 +6,12 @@
 # Use the enviornmental config files to configure the driver
 
 class_name: AcceptanceTester
+extensions:
+    enabled:
+        # Run ChromeDriver in the background when acceptance tests are running.
+        - Codeception\Extension\RunProcess:
+            0: ./build/tmp/webdriver/chromedriver --url-base=/wd/hub
+            sleep: 5 # wait 5 seconds for ChromeDriver to start up.
 modules:
     enabled:
         - \Helper\Acceptance
