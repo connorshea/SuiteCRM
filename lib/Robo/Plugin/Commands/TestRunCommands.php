@@ -62,6 +62,21 @@ class TestRunCommands extends \Robo\Tasks
     }
 
     /**
+     * Run API test suite.
+     * @param array $opts
+     * @option boolean verbose Whether to set the test suite to output extra information. Good for debugging.
+     */
+    public function TestsAPI($opts = ['verbose' => false]) {
+      $this->say('Running API Test Suite.');
+
+      if ($opts['verbose']) {
+        $this->_exec('./vendor/bin/codecept run api -vvv -d');
+      } else {
+        $this->_exec('./vendor/bin/codecept run api');
+      }
+    }
+
+    /**
      * Run acceptance test suite.
      * @param array $opts
      * @option boolean verbose Whether to set the test suite to output extra information. Good for debugging.
