@@ -5,7 +5,7 @@
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
  *
  * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2018 SalesAgility Ltd.
+ * Copyright (C) 2011 - 2019 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -39,9 +39,6 @@
  */
 namespace SuiteCRM\Robo\Plugin\Commands;
 
-use SuiteCRM\Utility\OperatingSystem;
-use SuiteCRM\Utility\Paths;
-
 class TestRunCommands extends \Robo\Tasks
 {
     use \SuiteCRM\Robo\Traits\RoboTrait;
@@ -50,53 +47,83 @@ class TestRunCommands extends \Robo\Tasks
      * Run install test suite.
      * @param array $opts
      * @option boolean verbose Whether to set the test suite to output extra information. Good for debugging.
+     * @option boolean fail-fast Stop after first failure.
      */
-    public function TestsInstall($opts = ['verbose' => false]) {
+    public function TestsInstall($opts = ['verbose' => false, 'fail-fast' => false]) {
       $this->say('Running Install Test Suite.');
 
+      $command = './vendor/bin/codecept run install --env chrome-driver';
+
       if ($opts['verbose']) {
-        $this->_exec('./vendor/bin/codecept run install -vvv -d --env chrome-driver');
-      } else {
-        $this->_exec('./vendor/bin/codecept run install --env chrome-driver');
+        $command .= ' -vvv -d';
       }
+      if ($opts['fail-fast']) {
+        $command .= ' -f';
+      }
+      
+      $this->_exec($command);
     }
 
     /**
      * Run API test suite.
      * @param array $opts
      * @option boolean verbose Whether to set the test suite to output extra information. Good for debugging.
+     * @option boolean fail-fast Stop after first failure.
      */
-    public function TestsAPI($opts = ['verbose' => false]) {
+    public function TestsAPI($opts = ['verbose' => false, 'fail-fast' => false]) {
       $this->say('Running API Test Suite.');
 
+      $command = './vendor/bin/codecept run api';
+
       if ($opts['verbose']) {
-        $this->_exec('./vendor/bin/codecept run api -vvv -d');
-      } else {
-        $this->_exec('./vendor/bin/codecept run api');
+        $command .= ' -vvv -d';
       }
+      if ($opts['fail-fast']) {
+        $command .= ' -f';
+      }
+      
+      $this->_exec($command);
     }
 
     /**
      * Run acceptance test suite.
      * @param array $opts
      * @option boolean verbose Whether to set the test suite to output extra information. Good for debugging.
+     * @option boolean fail-fast Stop after first failure.
      */
-    public function TestsAcceptance($opts = ['verbose' => false]) {
+    public function TestsAcceptance($opts = ['verbose' => false, 'fail-fast' => false]) {
       $this->say('Running Codeception Acceptance Test Suite.');
 
+      $command = './vendor/bin/codecept run acceptance --env chrome-driver';
+
       if ($opts['verbose']) {
-        $this->_exec('./vendor/bin/codecept run acceptance -vvv -d --env chrome-driver');
-      } else {
-        $this->_exec('./vendor/bin/codecept run acceptance --env chrome-driver');
+        $command .= ' -vvv -d';
       }
+      if ($opts['fail-fast']) {
+        $command .= ' -f';
+      }
+      
+      $this->_exec($command);
     }
 
     /**
      * Run PHPUnit unit test suite.
+     * @param array $opts
+     * @option boolean verbose Whether to set the test suite to output extra information. Good for debugging.
+     * @option boolean fail-fast Stop after first failure.
      */
-    public function TestsUnit() {
+    public function TestsUnit($opts = ['verbose' => false, 'fail-fast' => false]) {
       $this->say('Running PHPUnit Unit Test Suite.');
 
-      $this->_exec('./vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit');
+      $command = './vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit';
+      
+      if ($opts['verbose']) {
+        $command .= ' -v --debug';
+      }
+      if ($opts['fail-fast']) {
+        $command .= ' --stop-on-error --stop-on-failure';
+      }
+
+      $this->_exec($command);
     }
 }
