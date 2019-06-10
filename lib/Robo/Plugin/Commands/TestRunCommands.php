@@ -99,12 +99,4 @@ class TestRunCommands extends \Robo\Tasks
 
       $this->_exec('./vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit');
     }
-
-    /**
-     * Test things and stuff.
-     * @param $variable
-     */
-    private function helper($variable) {
-        
-    }
 }

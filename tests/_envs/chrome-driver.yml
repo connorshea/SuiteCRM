@@ -4,7 +4,7 @@ extensions:
     - Codeception\Extension\RunProcess:
         0: ./build/tmp/webdriver/chromedriver --url-base=/wd/hub
         sleep: 5 # wait 5 seconds for ChromeDriver to start up.
-        modules:
+modules:
   enabled:
     - \SuiteCRM\Test\Driver\WebDriver
   config:
