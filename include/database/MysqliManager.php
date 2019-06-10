@@ -356,9 +356,6 @@ class MysqliManager extends MysqlManager
         }
         mysqli_set_charset($this->database, "utf8");
 
-        // https://github.com/salesagility/SuiteCRM/issues/7107
-        mysqli_query($this->database, "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode, 'STRICT_TRANS_TABLES', ''))");
-
         if ($this->checkError('Could Not Connect', $dieOnError)) {
             $GLOBALS['log']->info("connected to db");
         }
