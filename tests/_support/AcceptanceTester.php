@@ -40,20 +40,13 @@ class AcceptanceTester extends \Codeception\Actor
     {
         $I = $this;
 
-        // TODO: Make this work when the user is logged in as a different user.
         // Go to the root of the SuiteCRM instance.
         $I->amOnUrl($I->getInstanceURL());
-        // User is not logged in.
-        if ($I->canSeeElement('#loginform')) {
-            $I->fillField('#user_name', $username);
-            $I->fillField('#username_password', $password);
-            $I->click('Log In');
-            $I->waitForElementNotVisible('#loginform', 120);
-        // User is logged in.
-        } else {
-            // Can see their own username in the header.
-            $I->seeElement('#globalLinks .user-menu-button', ['title' => $username]);
-        }
+        $I->waitForElementVisible('#loginform');
+        $I->fillField('#user_name', $username);
+        $I->fillField('#username_password', $password);
+        $I->click('Log In');
+        $I->waitForElementNotVisible('#loginform', 120);
     }
 
     public function loginAsAdmin()
