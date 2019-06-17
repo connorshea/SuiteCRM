@@ -35,11 +35,13 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @param string $username
      * @param string $password
+     * @param boolean $admin Whether the login is supposed to be done as an admin.
      */
-    public function login($username, $password)
+    public function login($username, $password, $admin = false)
     {
         $I = $this;
-        if ($I->loadSessionSnapshot('login')) {
+        $snapshotName = ($admin ? 'adminLogin' : 'login');
+        if ($I->loadSessionSnapshot($snapshotName)) {
             return;
         }
         // Log In
@@ -48,7 +50,7 @@ class AcceptanceTester extends \Codeception\Actor
         $I->fillField('#username_password', $password);
         $I->click('Log In');
         $I->waitForElementNotVisible('#loginform', 120);
-        $I->saveSessionSnapshot('login');
+        $I->saveSessionSnapshot($snapshotName);
     }
 
     public function loginAsAdmin()
@@ -57,7 +59,8 @@ class AcceptanceTester extends \Codeception\Actor
 
         $I->login(
             $I->getAdminUser(),
-            $I->getAdminPassword()
+            $I->getAdminPassword(),
+            true
         );
     }
 
