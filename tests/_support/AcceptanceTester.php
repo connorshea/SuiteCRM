@@ -41,7 +41,6 @@ class AcceptanceTester extends \Codeception\Actor
         $I = $this;
 
         // Go to the root of the SuiteCRM instance.
-        $I->amOnUrl($I->getInstanceURL());
         $I->waitForElementVisible('#loginform');
         $I->fillField('#user_name', $username);
         $I->fillField('#username_password', $password);
