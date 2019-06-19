@@ -4,7 +4,8 @@ modules:
   config:
     \SuiteCRM\Test\Driver\WebDriver:
       url: "http://localhost/"
-      wait: 0
+      # This is 5 seconds on Travis, but 8 seconds on GitLab CI because it's a bit slower. Not 100% sure this is necessary, ideally it'd be 0.
+      wait: 8
       port: 9515 # ChromeDriver port
       browser: chrome
       window_size: false
