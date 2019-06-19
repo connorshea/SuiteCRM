@@ -65,7 +65,7 @@ variables:
     # - ./vendor/bin/codecept run tests/api/V8/ -d -vvv
     # Run basic acceptance tests
     - echo "\$sugar_config['imap_test'] = true;" >> config_override.php
-    - ./vendor/bin/codecept run acceptance --env travis-ci-hub -d -vvv
+    - ./vendor/bin/codecept run acceptance --env travis-ci-hub
   # Save 'var/log/apache2/error.log', 'suitecrm.log', and tests output as artifacts
   # https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html
   artifacts:
