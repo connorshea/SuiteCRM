@@ -48,9 +48,8 @@ variables:
     - chmod -R 777 .
     - echo "\$sugar_config['state_checker']['test_state_check_mode'] = 2;" >> config_override.php
     - echo "\$sugar_config['show_log_trace'] = true;" >> config_override.php
-    - echo "\$sugar_config['logger']['level'] = 'fatal';" >> config_override.php
     # Run PHPUnit Unit tests.
-    - ./vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit
+    # - ./vendor/bin/phpunit --colors --configuration ./tests/phpunit.xml.dist ./tests/unit/phpunit
     # Install OAuth2 demo data
     - mysql --host=mysql -u${MYSQL_USER} -p${MYSQL_PASSWORD} -D${MYSQL_DATABASE} -v -e "source tests/_data/api_data.sql"
     # Install demo user data
