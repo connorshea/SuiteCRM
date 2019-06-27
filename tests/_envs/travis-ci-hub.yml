@@ -1,3 +1,6 @@
+extensions:
+  enabled:
+    - Codeception\Extension\Recorder
 modules:
   enabled:
     - \SuiteCRM\Test\Driver\WebDriver
