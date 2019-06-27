@@ -18,7 +18,7 @@ variables:
 
 .default_before_script_template:
   before_script: &default_before_script_definition
-    - composer install --no-plugins --no-progress --no-suggess
+    - composer install --no-plugins --no-progress --no-suggest
 
 .php_codecept_before_script_template:
   before_script: &php_codecept_before_script_definition
