@@ -37,7 +37,7 @@ class ModuleBuilder extends Administration
             // Close confirmation window
             $I->closePopupSuccess();
 
-            $I->waitForText('New Module');
+            // $I->waitForText('New Module');
             // Create new module
             $I->click('New Module');
             $I->waitForElement('[name="label"]');
