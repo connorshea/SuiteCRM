@@ -82,17 +82,17 @@ class ElasticsearchCest
         $I->fillField('#es-password', 'admin');
 
         $I->click('Schedule full indexing');
-        $I->wait(1);
+        $I->waitForText('A full indexing has been scheduled and will start in the next 60 seconds. Search results might be inconsistent until the process is complete.');
         $I->seeInPopup('A full indexing has been scheduled and will start in the next 60 seconds. Search results might be inconsistent until the process is complete.');
         $I->acceptPopup();
         
         $I->click('Schedule partial indexing');
-        $I->wait(1);
+        $I->waitForText('A partial indexing has been scheduled and will start in the next 60 seconds.');
         $I->seeInPopup('A partial indexing has been scheduled and will start in the next 60 seconds.');
         $I->acceptPopup();
 
         $I->click('Test connection');
-        $I->wait(1);
+        $I->waitForText('Connection successful');
         $I->seeInPopup('Connection successful.');
         $I->acceptPopup();
 
@@ -173,7 +173,7 @@ class ElasticsearchCest
             $I->waitForElementVisible('//*[@id="tab-actions"]/a');
             $I->click('//*[@id="tab-actions"]/a');
             $I->click('Delete');
-            $I->wait(1);
+            $I->waitForText('Are you sure you want to delete this record?');
             $I->seeInPopup('Are you sure you want to delete this record?');
             $I->acceptPopup();
         }
