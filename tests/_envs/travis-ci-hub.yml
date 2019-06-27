@@ -10,8 +10,6 @@ modules:
       window_size: false
       clear_cookies: true
       capabilities:
-        # If there are unexpected alerts, accept them.
-        unexpectedAlertBehaviour: 'accept'
         "goog:chromeOptions":
             args: ["--headless", "--disable-gpu", "--no-sandbox", "window-size=1920x1080"]
             binary: "/usr/bin/google-chrome-stable"
