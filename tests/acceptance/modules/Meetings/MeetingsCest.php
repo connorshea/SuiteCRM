@@ -113,7 +113,7 @@ class MeetingsCest
         $meeting->createMeeting('Test_'. $this->fakeData->company());
 
         // Inline edit
-        $I->doubleClick('#date_start');
+        $I->doubleClick(".detail-view-field[field='date_start']");
         $I->fillField('#date_start_date', '01/01/2000');
         $I->selectOption('#date_start_hours', '01');
         $I->selectOption('#date_start_minutes', '00');
