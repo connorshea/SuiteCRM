@@ -158,6 +158,7 @@ class ModuleBuilder extends Administration
         $I->closePopupSuccess();
 
         // Wait for page to refresh and look for new package link
+        // The explicit timeout is unfortunately necessary for GitLab CI.
         $I->waitForElement('#newPackageLink', 15);
     }
 }
