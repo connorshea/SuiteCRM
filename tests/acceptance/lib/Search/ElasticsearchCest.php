@@ -173,7 +173,7 @@ class ElasticsearchCest
             $I->waitForElementVisible('//*[@id="tab-actions"]/a');
             $I->click('//*[@id="tab-actions"]/a');
             $I->click('Delete');
-            $I->waitForText('Are you sure you want to delete this record?');
+            $I->wait(1);
             $I->seeInPopup('Are you sure you want to delete this record?');
             $I->acceptPopup();
         }
