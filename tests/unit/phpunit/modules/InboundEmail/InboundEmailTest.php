@@ -1,5 +1,7 @@
 <?php
 
+use SuiteCRM\Test\SuitePHPUnit_Framework_TestCase;
+
 include_once __DIR__ . '/../../../../../include/Imap/ImapHandlerFakeData.php';
 include_once __DIR__ . '/../../../../../include/Imap/ImapHandlerFake.php';
 require_once __DIR__ . '/../../../../../modules/InboundEmail/InboundEmail.php';
@@ -10,8 +12,7 @@ require_once __DIR__ . '/../../../../../modules/InboundEmail/InboundEmail.php';
  * @param $mode
  * @return bool|resource
  */
-function tempFileWithMode($mode)
-{
+function tempFileWithMode($mode) {
     $path = tempnam(sys_get_temp_dir(), '');
     $file = fopen($path, $mode);
     register_shutdown_function(function() use($path) {
@@ -22,7 +23,7 @@ function tempFileWithMode($mode)
     return $file;
 }
 
-class InboundEmailTest extends SuiteCRM\StateCheckerPHPUnitTestCaseAbstract
+class InboundEmailTest extends SuitePHPUnit_Framework_TestCase
 {
 
     protected function storeStateAll()

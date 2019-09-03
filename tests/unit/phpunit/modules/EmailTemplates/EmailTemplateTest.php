@@ -2,7 +2,9 @@
 
 require_once 'modules/EmailTemplates/EmailTemplateParser.php';
 
-class EmailTemplateTest extends SuiteCRM\StateCheckerPHPUnitTestCaseAbstract
+use SuiteCRM\Test\SuitePHPUnit_Framework_TestCase;
+
+class EmailTemplateTest extends SuitePHPUnit_Framework_TestCase
 {
     public function setUp()
     {
