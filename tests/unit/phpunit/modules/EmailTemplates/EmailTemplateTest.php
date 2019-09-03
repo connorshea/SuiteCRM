@@ -55,7 +55,7 @@ class EmailTemplateTest extends SuitePHPUnit_Framework_TestCase
     {
         global $current_user;
 
-        $state = new SuiteCRM\StateSaver();
+
         $state->pushTable('aod_index');
         $state->pushTable('email_templates');
         $state->pushGlobals();
@@ -102,7 +102,7 @@ class EmailTemplateTest extends SuitePHPUnit_Framework_TestCase
     {
         global $sugar_config;
 
-        $state = new SuiteCRM\StateSaver();
+
         $state->pushTable('email_templates');
         $state->pushTable('aod_index');
 
@@ -179,7 +179,7 @@ class EmailTemplateTest extends SuitePHPUnit_Framework_TestCase
     public function testcreate_export_query()
     {
         // save state
-        $state = new \SuiteCRM\StateSaver();
+
         $state->pushGlobals();
 
         // test

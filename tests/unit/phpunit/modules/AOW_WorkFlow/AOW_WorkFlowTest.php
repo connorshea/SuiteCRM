@@ -76,7 +76,7 @@ class AOW_WorkFlowTest extends SuitePHPUnit_Framework_TestCase
 
     public function testsave()
     {
-        $state = new SuiteCRM\StateSaver();
+
         $state->pushTable('aow_conditions');
         $state->pushTable('aod_indexevent');
         $state->pushTable('aow_workflow');
@@ -125,7 +125,7 @@ class AOW_WorkFlowTest extends SuitePHPUnit_Framework_TestCase
 
     public function testrun_flows()
     {
-        $state = new SuiteCRM\StateSaver();
+
         $state->pushGlobals();
 
         $aowWorkFlow = new AOW_WorkFlow();
@@ -341,7 +341,7 @@ class AOW_WorkFlowTest extends SuitePHPUnit_Framework_TestCase
 
     public function testrun_actions()
     {
-        $state = new SuiteCRM\StateSaver();
+
         $state->pushTable('aow_processed');
         $state->pushTable('tracker');
 
