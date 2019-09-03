@@ -11,7 +11,7 @@ abstract class SuitePHPUnit_Framework_TestCase extends TestCaseAbstract
     /**
      * @var array
      */
-    protected $env = array();
+    protected $env = [];
 
     /**
      * @var \LoggerManager
