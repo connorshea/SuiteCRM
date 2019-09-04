@@ -1,6 +1,6 @@
 <?php
 
-use SuiteCRM\Test\SuitePHPUnit_Framework_TestCase;
+use SuiteCRM\Test\SuitePHPUnitFrameworkTestCase;
 
 include_once __DIR__ . '/../../../../../include/Imap/ImapHandlerFakeData.php';
 include_once __DIR__ . '/../../../../../include/Imap/ImapHandlerFake.php';
@@ -23,7 +23,7 @@ function tempFileWithMode($mode) {
     return $file;
 }
 
-class InboundEmailTest extends SuitePHPUnit_Framework_TestCase
+class InboundEmailTest extends SuitePHPUnitFrameworkTestCase
 {
     public function testThisCallback()
     {
