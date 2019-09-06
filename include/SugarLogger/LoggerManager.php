@@ -132,7 +132,7 @@ class LoggerManager
                     (isset(self::$_levelMapping[$method]) ? self::$_levelMapping[$method] : null)
                 ))) {
             //now we get the logger type this allows for having a file logger an email logger, a firebug logger or any other logger you wish you can set different levels to log differently
-            $logger = (!empty(self::$_logMapping[$method])) ?
+            $logger = !empty(self::$_logMapping[$method]) ?
                 self::$_logMapping[$method] : self::$_logMapping['default'];
             //if we haven't instantiated that logger let's instantiate
             if (!isset(self::$_loggers[$logger])) {
@@ -269,6 +269,7 @@ class LoggerManager
     public static function getLogLevel()
     {
         $instance = self::$_instance;
+
         return $instance::$_level;
     }
 
