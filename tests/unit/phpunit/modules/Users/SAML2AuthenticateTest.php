@@ -1,9 +1,10 @@
 <?php
-use SuiteCRM\StateSaver;
 
 require_once __DIR__ . '/../../../../../modules/Users/authentication/SAML2Authenticate/SAML2Authenticate.php';
 
-class SAML2MetadataTest extends SuiteCRM\StateCheckerPHPUnitTestCaseAbstract {
+use SuiteCRM\Test\SuitePHPUnitFrameworkTestCase;
+
+class SAML2MetadataTest extends SuitePHPUnitFrameworkTestCase {
 
     public function testEntryPointNoAuth() {
         $controller = new SugarController();
@@ -12,8 +13,6 @@ class SAML2MetadataTest extends SuiteCRM\StateCheckerPHPUnitTestCaseAbstract {
     }
 
     public function testIncompleteSettings() {
-        $state = new StateSaver();
-        $state->pushErrorLevel();
         // php-saml triggers deprecation warnings, so disable temporarily
         error_reporting(E_ALL & ~E_DEPRECATED);
 
@@ -26,7 +25,7 @@ class SAML2MetadataTest extends SuiteCRM\StateCheckerPHPUnitTestCaseAbstract {
                 $failed = true;
             }
         } finally {
-            $state->popErrorLevel();
+            $GLOBALS['log']->fatal('yolo');
         }
 
         $this->assertTrue($failed);
@@ -48,14 +47,12 @@ class SAML2MetadataTest extends SuiteCRM\StateCheckerPHPUnitTestCaseAbstract {
             ),
         );
 
-        $state = new StateSaver();
-        $state->pushErrorLevel();
         // php-saml triggers deprecation warnings, so disable temporarily
         error_reporting(E_ALL & ~E_DEPRECATED);
         try {
             $xml = getSAML2Metadata($settings);
         } finally {
-            $state->popErrorLevel();
+            $GLOBALS['log']->fatal('yolo');
         }
         $this->assertNotEmpty($xml);
         $this->assertRegexp('/someid/', $xml);
