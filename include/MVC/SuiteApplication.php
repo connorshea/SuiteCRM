@@ -28,7 +28,7 @@ class SuiteApplication
             && is_null($return_module)
             && is_null($return_action)
         ) {
-            throw new Exception('Attempted to build an invalid SuiteCRM URL with no parameters.');
+            throw new \Exception('Attempted to build an invalid SuiteCRM URL with no parameters.');
         }
 
         $urlParts = [];
