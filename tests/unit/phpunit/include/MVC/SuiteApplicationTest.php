@@ -1,6 +1,7 @@
 <?php
 
 use SuiteCRM\Test\SuitePHPUnitFrameworkTestCase;
+use SuiteCRM\SuiteApplication;
 
 class SuiteApplicationTest extends SuitePHPUnitFrameworkTestCase
 {
