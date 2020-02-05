@@ -176,17 +176,4 @@ class UtilsTest extends SuitePHPUnitFrameworkTestCase
         // Make sure it also understands strings with whitespace.
         $this->assertEquals(8192, return_bytes('  8K  '));
     }
-
-    function testbuildSuiteUrl() {
-        // Test that it works when all four parameters are supplied.
-        $this->assertEquals(
-            "index.php?module=Store&action=buy&return_module=Store&return_action=FooView",
-            buildSuiteUrl('Store', 'buy', 'Store', 'FooView')
-        );
-        // Test that it works even if the other values are null.
-        $this->assertEquals("index.php?module=Store", buildSuiteUrl('Store', null, null, null));
-        $this->assertEquals("index.php?action=buy", buildSuiteUrl(null, 'buy', null, null));
-        $this->assertEquals("index.php?return_module=Store", buildSuiteUrl(null, null, 'Store', null));
-        $this->assertEquals("index.php?return_action=FooView", buildSuiteUrl(null, null, null, 'FooView'));
-    }
 }
